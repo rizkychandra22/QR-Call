@@ -77,8 +77,12 @@
                                 </li>
                             @endif
                             <li class="menu-header">Menu Utama {{ Auth::user()->role }}</li>
-                            @if((Auth::user()->isKaryawan()))
-                                
+                            @if((Auth::user()->isKaryawan()))    
+                                <li @class(['active' => request()->routeIs('karyawan.present')])>
+                                    <a href="{{ route('karyawan.present') }}" wire:navigate class="nav-link">
+                                        <i class="fas fa-qrcode"></i> <span>Presensi QR</span>
+                                    </a>
+                                </li>
                             @else
                                 <li @class(['active' => request()->routeIs('admin.generate-shift', 'admin.generate-qr', 'admin.check-qr', 'admin.set-location')])>
                                     <a href="{{ route('admin.generate-qr') }}" wire:navigate class="nav-link">

@@ -16,10 +16,10 @@
                     <div class="card-header">
                         <h4>{{ $content }}</h4>
                         <div class="card-header-action">
-                            {{-- <div class="btn-group">
-                                <a href="" class="btn btn-danger">Daftar Produk</a>
-                                <a href="" class="btn btn-success">Input Produk</a>
-                            </div> --}}
+                            <div class="btn-group">
+                                <a href="" class="btn btn-danger">In Present</a>
+                                <a href="" class="btn btn-success">Out Present</a>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body">
@@ -33,24 +33,4 @@
             </div>
         </div>
     </section>
-
-    @push('scripts')
-        <script>
-            function initDashboardAlert() {
-                setTimeout(function() {
-                    var infoAlert = document.getElementById('alert');
-                    if (infoAlert) {
-                        infoAlert.style.transition = 'opacity 0.5s ease-out';
-                        infoAlert.style.opacity = '0';
-                        setTimeout(function() {
-                            infoAlert.remove();
-                        }, 500);
-                    }
-                }, 3000);
-            }
-
-            document.addEventListener('livewire:navigated', initDashboardAlert);
-            document.addEventListener('DOMContentLoaded', initDashboardAlert);
-        </script>
-    @endpush
 </div>

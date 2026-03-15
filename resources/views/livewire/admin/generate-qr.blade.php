@@ -31,12 +31,13 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        {{-- Form Input (Row) --}}
                         <form wire:submit.prevent="generate">
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label>Pilih Jenis Absen</label>
                                     <select wire:model="present" class="form-control @error('present') is-invalid @enderror">
-                                        <option value="">--- Pilih Tipe Absen ---</option>
+                                        <option value="">&mdash; &mdash; Pilih Tipe Absen &mdash; &mdash;</option>
                                         <option value="in_present">Absen Masuk</option>
                                         <option value="out_present">Absen Keluar</option>
                                     </select>
@@ -45,7 +46,7 @@
                                 <div class="form-group col-md-4">
                                     <label>Lokasi Radius</label>
                                     <select wire:model="radius_present_id" class="form-control @error('radius_present_id') is-invalid @enderror">
-                                        <option value="">--- Pilih Lokasi Radius ---</option>
+                                        <option value="">&mdash; &mdash; Pilih Lokasi Radius &mdash; &mdash;</option>
                                         @foreach($locations as $location)
                                             <option value="{{ $location->id }}">
                                                 {{ $location->name }} ({{ $location->radius }} m)
@@ -57,7 +58,7 @@
                                 <div class="form-group col-md-4">
                                     <label>Shift Kerja</label>
                                     <select wire:model="shift_id" class="form-control @error('shift_id') is-invalid @enderror">
-                                        <option value="">--- Pilih Shift Kerja ---</option>
+                                        <option value="">&mdash; &mdash; Pilih Shift Kerja &mdash; &mdash;</option>
                                         @foreach($shifts as $shift)
                                             <option value="{{ $shift->id }}">
                                                 Shift {{ $shift->shift_name }} 
@@ -67,14 +68,11 @@
                                     </select>
                                     @error('shift_id') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-4">
                                     <label>Tanggal Absen</label>
                                     <input type="date" wire:model="date" class="form-control @error('date') is-invalid @enderror">
                                     @error('date') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                            </div>
-
-                            <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label>Mulai Aktif</label> 
                                     <input type="time" wire:model="start_time" class="form-control @error('start_time') is-invalid @enderror">
@@ -84,6 +82,23 @@
                                     <label>Berakhir Aktif</label>
                                     <input type="time" wire:model="end_time" class="form-control @error('end_time') is-invalid @enderror">
                                     @error('end_time') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Akses Kehadiran</label> 
+                                    <select wire:model="late_access" class="form-control @error('late_access') is-invalid @enderror">
+                                        <option value="">&mdash; &mdash; Pilih Akses Absen &mdash; &mdash;</option>
+                                        <option value="no_late">Dilarang Telat</option>
+                                        <option value="allow_late">Boleh Telat Dengan Batas Menit</option>
+                                    </select>
+                                    @error('late_access') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Waktu Keterlambatan (Menit)</label>
+                                    <input type="number" min="1" max="180" wire:model="late_tolerance_minutes"
+                                        class="form-control @error('late_tolerance_minutes') is-invalid @enderror"
+                                        @disabled($late_access !== 'allow_late')
+                                        placeholder="Contoh: 15">
+                                    @error('late_tolerance_minutes') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Tampilkan QR-Code Absensi</label>

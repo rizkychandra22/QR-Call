@@ -16,6 +16,8 @@ class GenerateQr extends Component
     public $present;
     public $shift_id;
     public $radius_present_id;
+    public $late_access;
+    public $late_tolerance_minutes;
     public $date;
     public $start_time;
     public $end_time;
@@ -36,10 +38,11 @@ class GenerateQr extends Component
         $this->linkTitle = route('admin.dashboard');
         $this->linkSubpage = route('admin.generate-qr');
 
-        $this->radius_present_id = RadiusPresent::query()->value('id');
         $this->date = Carbon::now()->toDateString();
         $this->start_time = Carbon::now()->format('H:i');
         $this->end_time = Carbon::now()->addMinutes(3)->format('H:i');
+        $this->late_tolerance_minutes = null;
+        // $this->late_access = 'no_late';
         // $this->end_time = Carbon::now()->addHours(1)->format('H:i');
     }
 
@@ -55,6 +58,8 @@ class GenerateQr extends Component
             'present' => 'required',
             'shift_id' => 'required|exists:shifts,id',
             'radius_present_id' => 'required|exists:radius_presents,id',
+            'late_access' => 'required|in:no_late,allow_late',
+            'late_tolerance_minutes' => 'nullable|required_if:late_access,allow_late|integer|min:1|max:180',
             'date' => 'required|date',
             'start_time' => 'required',
             'end_time' => 'required',
@@ -74,6 +79,8 @@ class GenerateQr extends Component
             'radius_present_id' => $this->radius_present_id,
             'qr_code_present' => $uniqueCode,
             'present' => $this->present,
+            'allow_late' => $this->late_access === 'allow_late',
+            'late_tolerance_minutes' => $this->late_access === 'allow_late' ? $this->late_tolerance_minutes : null,
             'date' => $this->date,
             'start_time' => $this->date . ' ' . $this->start_time,
             'end_time' => $this->date . ' ' . $this->end_time,

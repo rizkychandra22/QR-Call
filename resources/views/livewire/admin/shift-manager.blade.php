@@ -119,12 +119,12 @@
                                                     <td class="text-center">{{ \Carbon\Carbon::parse($shift->in_time)->format('H:i') }}</td>
                                                     <td class="text-center">{{ \Carbon\Carbon::parse($shift->out_time)->format('H:i') }}</td>
                                                     <td class="text-center">
-                                                        <button wire:click="edit({{ $shift->id }})" class="btn btn-sm btn-outline-warning mr-1" title="Edit">
+                                                        <button wire:click="edit({{ $shift->id }})" class="btn btn-sm btn-outline-warning mr-1 mt-1" title="Edit">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
                                                         <button wire:click="delete({{ $shift->id }})" 
                                                                 wire:confirm="Hapus Shift {{ $shift->shift_name }} Dengan Code {{ $shift->shift_code }}?"
-                                                                class="btn btn-sm btn-outline-danger" title="Hapus">
+                                                                class="btn btn-sm btn-outline-danger mt-1" title="Hapus">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </td>

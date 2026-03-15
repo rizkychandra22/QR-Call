@@ -18,6 +18,8 @@ class QrCode extends Model
         'radius_present_id',
         'qr_code_present',
         'present',
+        'allow_late',
+        'late_tolerance_minutes',
         'date',
         'start_time',
         'end_time',
@@ -33,6 +35,8 @@ class QrCode extends Model
     {
         return [
             'date' => 'date',
+            'allow_late' => 'boolean',
+            'late_tolerance_minutes' => 'integer',
             'start_time' => 'datetime',
             'end_time' => 'datetime',
         ];

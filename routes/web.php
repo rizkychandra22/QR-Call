@@ -7,6 +7,7 @@ use App\Livewire\Admin\ShiftManager;
 use App\Livewire\Auth\Login;
 use App\Livewire\Dashboard\Admin;
 use App\Livewire\Dashboard\Karyawan;
+use App\Livewire\Karyawan\PresensiList;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ Route::middleware(['RoleUser:Admin'])->prefix('dashboard')->group(function () {
 // Route Grup Role Karyawan
 Route::middleware(['RoleUser:Karyawan'])->prefix('dashboard')->group(function () {
     Route::get('/karyawan', Karyawan::class)->name('karyawan.dashboard');
+    Route::get('/karyawan/present', PresensiList::class)->name('karyawan.present');
 });
 
 // Route Download Struk PDF
