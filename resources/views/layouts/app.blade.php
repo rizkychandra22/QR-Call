@@ -80,7 +80,7 @@
                             @if((Auth::user()->isKaryawan()))    
                                 <li @class(['active' => request()->routeIs('karyawan.present')])>
                                     <a href="{{ route('karyawan.present') }}" wire:navigate class="nav-link">
-                                        <i class="fas fa-qrcode"></i> <span>Presensi QR</span>
+                                        <i class="fas fa-qrcode"></i> <span>Present QR</span>
                                     </a>
                                 </li>
                             @else

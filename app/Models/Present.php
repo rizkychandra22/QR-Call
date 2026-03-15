@@ -38,7 +38,6 @@ class Present extends Model
     {
         return [
             'date' => 'date',
-            'time' => 'time',
             'lat_location_present' => 'double',
             'lng_location_present' => 'double',
         ];
