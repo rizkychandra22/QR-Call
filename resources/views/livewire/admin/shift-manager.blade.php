@@ -18,7 +18,7 @@
                         <div class="card-header-action">
                             <div class="btn-group">
                                 <a href="{{ route('admin.generate-qr') }}" class="btn btn-warning">
-                                    <i class="fas fa-qrcode mr-1"></i> Present
+                                    <i class="fas fa-qrcode mr-1"></i> Generate
                                 </a>
                                 <a href="{{ route('admin.set-location') }}" class="btn btn-info">
                                     <i class="fas fa-map-marker-alt mr-1"></i> Radius

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\RadiusPresent;
 use App\Models\Shift;
 use App\Models\QrCode as QrModel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -14,6 +15,7 @@ class GenerateQr extends Component
     // Form Properties
     public $present;
     public $shift_id;
+    public $radius_present_id;
     public $date;
     public $start_time;
     public $end_time;
@@ -34,6 +36,7 @@ class GenerateQr extends Component
         $this->linkTitle = route('admin.dashboard');
         $this->linkSubpage = route('admin.generate-qr');
 
+        $this->radius_present_id = RadiusPresent::query()->value('id');
         $this->date = Carbon::now()->toDateString();
         $this->start_time = Carbon::now()->format('H:i');
         $this->end_time = Carbon::now()->addMinutes(3)->format('H:i');
@@ -42,9 +45,16 @@ class GenerateQr extends Component
 
     public function generate()
     {
+        if (! RadiusPresent::query()->exists()) {
+            session()->flash('error', 'Tambahkan lokasi radius terlebih dahulu sebelum membuat QR-Code.');
+
+            return;
+        }
+
         $this->validate([
             'present' => 'required',
-            'shift_id' => 'required',
+            'shift_id' => 'required|exists:shifts,id',
+            'radius_present_id' => 'required|exists:radius_presents,id',
             'date' => 'required|date',
             'start_time' => 'required',
             'end_time' => 'required',
@@ -61,6 +71,7 @@ class GenerateQr extends Component
         // Simpan ke Database
         QrModel::create([
             'shift_id' => $this->shift_id,
+            'radius_present_id' => $this->radius_present_id,
             'qr_code_present' => $uniqueCode,
             'present' => $this->present,
             'date' => $this->date,
@@ -87,6 +98,7 @@ class GenerateQr extends Component
 
         return view('livewire.admin.generate-qr', [
             'shifts' => Shift::all(),
+            'locations' => RadiusPresent::all(),
             'activeQrs' => $activeQrs,
         ])->layout('layouts.app', [
             'subpage' => $this->subpage,

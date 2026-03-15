@@ -2698,6 +2698,8 @@ body.layout-3 .main-footer {
   width: 100%; }
   .main-footer .footer-left {
     float: left; }
+  .main-footer .footer-center {
+    text-align: center; }
   .main-footer .footer-right {
     float: right; }
 

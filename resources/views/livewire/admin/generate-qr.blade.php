@@ -43,6 +43,18 @@
                                     @error('present') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <label>Lokasi Radius</label>
+                                    <select wire:model="radius_present_id" class="form-control @error('radius_present_id') is-invalid @enderror">
+                                        <option value="">--- Pilih Lokasi Radius ---</option>
+                                        @foreach($locations as $location)
+                                            <option value="{{ $location->id }}">
+                                                {{ $location->name }} ({{ $location->radius }} m)
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('radius_present_id') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                                <div class="form-group col-md-4">
                                     <label>Shift Kerja</label>
                                     <select wire:model="shift_id" class="form-control @error('shift_id') is-invalid @enderror">
                                         <option value="">--- Pilih Shift Kerja ---</option>
@@ -55,7 +67,7 @@
                                     </select>
                                     @error('shift_id') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-12">
                                     <label>Tanggal Absen</label>
                                     <input type="date" wire:model="date" class="form-control @error('date') is-invalid @enderror">
                                     @error('date') <small class="text-danger">{{ $message }}</small> @enderror
@@ -103,7 +115,7 @@
                 </div>
 
                 {{-- CARD MONITORING QR AKTIF (REALTIME) --}}
-                <div class="card" wire:poll.5s>
+                <div class="card card-info" wire:poll.5s>
                     <div class="card-header">
                         <h4><i class="fas fa-broadcast-tower text-danger mr-2"></i> Live QR Code Aktif</h4>
                         <div class="card-header-action">

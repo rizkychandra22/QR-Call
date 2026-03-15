@@ -30,8 +30,10 @@
                         </ul>
                     </div>
 
-                    {{-- @include('partials.notifications')
-                    @include('partials.messages') --}}
+                    <ul class="navbar-nav">
+                        @include('partials.templates.notifications')
+                        @include('partials.templates.messages')
+                    </ul>
 
                     <ul class="navbar-nav navbar-right">
                         <li class="dropdown">
@@ -80,7 +82,7 @@
                             @else
                                 <li @class(['active' => request()->routeIs('admin.generate-shift', 'admin.generate-qr', 'admin.check-qr', 'admin.set-location')])>
                                     <a href="{{ route('admin.generate-qr') }}" wire:navigate class="nav-link">
-                                        <i class="fas fa-qrcode"></i> <span>Generate QR</span>
+                                        <i class="fas fa-qrcode"></i> <span>Presensi QR</span>
                                     </a>
                                 </li>
                             @endif
@@ -97,8 +99,8 @@
                 </div>
 
                 <footer class="main-footer">
-                    <div class="footer-left">
-                        &copy; {{ date('Y') }} - Sistem Kasir
+                    <div class="footer-center">
+                        &copy; {{ date('Y') }} &mdash; QR-CALL System
                     </div>
                 </footer>
             </div>

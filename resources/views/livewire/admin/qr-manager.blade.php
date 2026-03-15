@@ -24,7 +24,7 @@
                                     <i class="fas fa-map-marker-alt mr-1"></i> Radius
                                 </a>
                                 <a href="{{ route('admin.generate-qr') }}" class="btn btn-danger">
-                                    <i class="fas fa-qrcode mr-1"></i> Present
+                                    <i class="fas fa-qrcode mr-1"></i> Generate
                                 </a>
                             </div>
                         </div>
