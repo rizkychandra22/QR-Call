@@ -10,14 +10,14 @@ class QrManager extends Component
 {
     public $title = 'Dashboard';
     public $subpage = 'Overview Admin';
-    public $content = 'Monitoring QR Code';
+    public $content = 'Monitoring QR';
     public $linkTitle;
     public $linkSubpage;
 
     public function mount()
     {
         $this->linkTitle = route('admin.dashboard');
-        $this->linkSubpage = route('admin.dashboard.generate-qr');
+        $this->linkSubpage = route('admin.generate-qr');
     }
 
     public function render()

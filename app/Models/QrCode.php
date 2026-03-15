@@ -15,6 +15,7 @@ class QrCode extends Model
      */
     protected $fillable = [
         'shift_id',
+        'radius_present_id',
         'qr_code_present',
         'present',
         'date',
@@ -43,6 +44,14 @@ class QrCode extends Model
     public function shift(): BelongsTo
     {
         return $this->belongsTo(Shift::class);
+    }
+
+    /**
+     * Get the allowed attendance radius/location for this QR code.
+     */
+    public function radiusPresent(): BelongsTo
+    {
+        return $this->belongsTo(RadiusPresent::class);
     }
 
     /**

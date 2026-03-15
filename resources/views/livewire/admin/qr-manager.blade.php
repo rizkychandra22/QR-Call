@@ -2,23 +2,13 @@
     <section class="section">
         <div class="section-header">
             <h1>{{ $subpage }}</h1>
-            @include('partials.breadcrumb')
+            @include('partials.templates.breadcrumb')
         </div>
 
         <div class="row">
             {{-- Alert Message --}}
             <div class="col-12">
-                @if (session()->has('success') || session()->has('danger'))
-                    <div x-data="{ show: true }" 
-                         x-show="show" 
-                         x-init="setTimeout(() => show = false, 3000)"
-                         class="alert alert-{{ session()->has('success') ? 'success' : 'danger' }} alert-dismissible show fade mb-4">
-                        <div class="alert-body">
-                            <button class="close" @click="show = false"><span>&times;</span></button>
-                            {{ session('success') ?? session('danger') }}
-                        </div>
-                    </div>
-                @endif
+                @include('partials.global.session-message')
             </div>
             
             <div class="col-lg-12">
@@ -27,11 +17,14 @@
                         <h4>{{ $content }}</h4>
                         <div class="card-header-action">
                             <div class="btn-group">
-                                <a href="{{ route('admin.dashboard.generate-shift') }}" class="btn btn-warning">
-                                    <i class="fas fa-clock mr-1"></i> Check Shift
+                                <a href="{{ route('admin.generate-shift') }}" class="btn btn-warning">
+                                    <i class="fas fa-clock mr-1"></i> Shift
                                 </a>
-                                <a href="{{ route('admin.dashboard.generate-qr') }}" class="btn btn-danger">
-                                    <i class="fas fa-qrcode mr-1"></i> Presensi QR
+                                <a href="{{ route('admin.set-location') }}" class="btn btn-info">
+                                    <i class="fas fa-map-marker-alt mr-1"></i> Radius
+                                </a>
+                                <a href="{{ route('admin.generate-qr') }}" class="btn btn-danger">
+                                    <i class="fas fa-qrcode mr-1"></i> Present
                                 </a>
                             </div>
                         </div>

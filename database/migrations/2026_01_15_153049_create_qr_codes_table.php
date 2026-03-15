@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('qr_codes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shift_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('radius_present_id')->constrained()->cascadeOnDelete();
             $table->string('qr_code_present')->unique();                      // Token/UUID unik untuk QR Code
             $table->enum('present', ['in_present', 'out_present']);   // QR untuk absen masuk / keluar
             $table->date('date');                                     // Tanggal absen

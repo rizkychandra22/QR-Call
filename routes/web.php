@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\GenerateQr;
 use App\Livewire\Admin\QrManager;
+use App\Livewire\Admin\RadiusPresent;
 use App\Livewire\Admin\ShiftManager;
 use App\Livewire\Auth\Login;
 use App\Livewire\Dashboard\Admin;
@@ -33,9 +34,10 @@ Route::middleware(['RoleUser:Admin,Karyawan'])->get('/user', function () {
 // Route Grup Role Admin
 Route::middleware(['RoleUser:Admin'])->prefix('dashboard')->group(function () {
     Route::get('/admin', Admin::class)->name('admin.dashboard');
-    Route::get('/admin/present/generate/shift', ShiftManager::class)->name('admin.dashboard.generate-shift');
-    Route::get('/admin/present/generate/qr-code/', GenerateQr::class)->name('admin.dashboard.generate-qr');
-    Route::get('/admin/present/check/generate/qr-code/', QrManager::class)->name('admin.dashboard.check-qr');
+    Route::get('/admin/present/generate/shift', ShiftManager::class)->name('admin.generate-shift');
+    Route::get('/admin/present/generate/qr-code/', GenerateQr::class)->name('admin.generate-qr');
+    Route::get('/admin/present/set-location/', RadiusPresent::class)->name('admin.set-location');
+    Route::get('/admin/present/check/generate/qr-code/', QrManager::class)->name('admin.check-qr');
 });
 
 // Route Grup Role Karyawan

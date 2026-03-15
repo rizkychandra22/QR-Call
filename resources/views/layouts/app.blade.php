@@ -78,8 +78,8 @@
                             @if((Auth::user()->isKaryawan()))
                                 
                             @else
-                                <li @class(['active' => request()->routeIs('admin.dashboard.generate-shift', 'admin.dashboard.generate-qr', 'admin.dashboard.check-qr')])>
-                                    <a href="{{ route('admin.dashboard.generate-qr') }}" wire:navigate class="nav-link">
+                                <li @class(['active' => request()->routeIs('admin.generate-shift', 'admin.generate-qr', 'admin.check-qr', 'admin.set-location')])>
+                                    <a href="{{ route('admin.generate-qr') }}" wire:navigate class="nav-link">
                                         <i class="fas fa-qrcode"></i> <span>Generate QR</span>
                                     </a>
                                 </li>

@@ -32,11 +32,12 @@ class GenerateQr extends Component
     public function mount()
     {
         $this->linkTitle = route('admin.dashboard');
-        $this->linkSubpage = route('admin.dashboard.generate-qr');
+        $this->linkSubpage = route('admin.generate-qr');
 
         $this->date = Carbon::now()->toDateString();
         $this->start_time = Carbon::now()->format('H:i');
-        $this->end_time = Carbon::now()->addMinutes(5)->format('H:i');
+        $this->end_time = Carbon::now()->addMinutes(3)->format('H:i');
+        // $this->end_time = Carbon::now()->addHours(1)->format('H:i');
     }
 
     public function generate()

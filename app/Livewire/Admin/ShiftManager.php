@@ -19,7 +19,7 @@ class ShiftManager extends Component
     public function mount()
     {
         $this->linkTitle = route('admin.dashboard');
-        $this->linkSubpage = route('admin.dashboard.generate-qr');
+        $this->linkSubpage = route('admin.generate-qr');
     }
 
     public function updatedShiftName($value)
