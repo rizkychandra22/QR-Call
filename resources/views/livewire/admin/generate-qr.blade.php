@@ -93,7 +93,7 @@
                                     @error('late_access') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label>Waktu Keterlambatan (Menit)</label>
+                                    <label>Toleransi Telat Setelah Berakhir Aktif (Menit)</label>
                                     <input type="number" min="1" max="180" wire:model="late_tolerance_minutes"
                                         class="form-control @error('late_tolerance_minutes') is-invalid @enderror"
                                         @disabled($late_access !== 'allow_late')
@@ -130,7 +130,7 @@
                 </div>
 
                 {{-- CARD MONITORING QR AKTIF (REALTIME) --}}
-                <div class="card card-info" wire:poll.5s>
+                <div class="card card-info" wire:poll.1s>
                     <div class="card-header">
                         <h4><i class="fas fa-broadcast-tower text-danger mr-2"></i> Live QR Code Aktif</h4>
                         <div class="card-header-action">

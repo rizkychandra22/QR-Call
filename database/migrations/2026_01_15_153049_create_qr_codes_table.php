@@ -21,6 +21,8 @@ return new class extends Migration
             $table->datetime('start_time');                           // Waktu mulai QR active
             $table->datetime('end_time');                             // Waktu QR berakhir / expired
             $table->enum('status', ['active', 'expired'])->default('active'); // Status QR
+            $table->boolean('allow_late')->default(false);
+            $table->unsignedSmallInteger('late_tolerance_minutes')->nullable();
             $table->timestamps();
         });
     }

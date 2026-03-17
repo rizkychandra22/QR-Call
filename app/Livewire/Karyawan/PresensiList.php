@@ -173,7 +173,7 @@ class PresensiList extends Component
         $toleranceEnd = $this->resolveAttendanceCutoff($qrCode);
 
         if ($now->greaterThan($toleranceEnd)) {
-            return 'Batas toleransi keterlambatan untuk QR ini sudah habis.';
+            return 'Absen anda ditolak karena melewati batas waktu ketentuan dan toleransi keterlambatan.';
         }
 
         return null;
@@ -216,13 +216,19 @@ class PresensiList extends Component
             return 'Absen keluar berhasil pada radius ' . $distanceLabel . ' m' . $workLabel . '.';
         }
 
-        if ($now->lessThanOrEqualTo($qrCode->start_time)) {
-            return 'Hadir tepat waktu. Jarak ke titik presensi ' . $distanceLabel . ' m.';
+        if ($now->lessThanOrEqualTo($qrCode->end_time)) {
+            return 'Hadir sesuai waktu. Jarak ke titik presensi ' . $distanceLabel . ' m.';
         }
 
-        $lateMinutes = (int) floor($qrCode->start_time->diffInSeconds($now) / 60);
+        $lateMinutes = (int) floor($qrCode->end_time->diffInSeconds($now) / 60);
 
-        return 'Hadir terlambat ' . $lateMinutes . ' menit. Jarak ke titik presensi ' . $distanceLabel . ' m.';
+        $lateLabel = 'Hadir terlambat ' . $lateMinutes . ' menit';
+
+        if ($qrCode->allow_late) {
+            $lateLabel .= ', namun ada toleransi kehadiran';
+        }
+
+        return $lateLabel . '. Jarak ke titik presensi ' . $distanceLabel . ' m.';
     }
 
     private function calculateDistanceInMeters(float $lat1, float $lng1, float $lat2, float $lng2): float
@@ -252,9 +258,9 @@ class PresensiList extends Component
             ->where('status', 'active')
             ->whereDate('date', now()->toDateString())
             ->where('start_time', '<=', now())
-            ->where('end_time', '>=', now())
             ->latest('start_time')
-            ->get();
+            ->get()
+            ->filter(fn (QrCode $qrCode) => now()->lessThanOrEqualTo($this->resolveAttendanceCutoff($qrCode)));
 
         return view('livewire.karyawan.presensi-list', [
             'presents' => $presents,

@@ -33,24 +33,4 @@
             </div>
         </div>
     </section>
-
-    @push('scripts')
-        <script>
-            function initDashboardAlert() {
-                setTimeout(function() {
-                    var infoAlert = document.getElementById('alert');
-                    if (infoAlert) {
-                        infoAlert.style.transition = 'opacity 0.5s ease-out';
-                        infoAlert.style.opacity = '0';
-                        setTimeout(function() {
-                            infoAlert.remove();
-                        }, 500);
-                    }
-                }, 3000);
-            }
-
-            document.addEventListener('livewire:navigated', initDashboardAlert);
-            document.addEventListener('DOMContentLoaded', initDashboardAlert);
-        </script>
-    @endpush
 </div>

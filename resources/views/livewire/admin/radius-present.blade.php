@@ -50,9 +50,11 @@
                                             <label>Radius Lokasi</label>
                                             <select name="location_radius" id="location_radius" class="form-control @error('location_radius') is-invalid @enderror" wire:model.live="location_radius">
                                                 <option value="">Pilih Radius</option>
-                                                <option value="50">50 meter</option>
                                                 <option value="100">100 meter</option>
-                                                <option value="200">200 meter</option>
+                                                <option value="250">250 meter</option>
+                                                <option value="500">500 meter</option>
+                                                <option value="750">750 meter</option>
+                                                <option value="1000">1 kilometer</option>
                                             </select>
                                             @error('location_radius') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>

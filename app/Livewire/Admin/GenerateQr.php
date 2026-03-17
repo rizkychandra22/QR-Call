@@ -62,7 +62,9 @@ class GenerateQr extends Component
             'late_tolerance_minutes' => 'nullable|required_if:late_access,allow_late|integer|min:1|max:180',
             'date' => 'required|date',
             'start_time' => 'required',
-            'end_time' => 'required',
+            'end_time' => 'required|after:start_time',
+        ], [
+            'end_time.after' => 'Waktu berakhir aktif harus setelah waktu mulai aktif.',
         ]);
 
         // Generate Unique QR Code Value: shiftCode + date(dm) + random(9)
@@ -99,9 +101,9 @@ class GenerateQr extends Component
     {
         $activeQrs = QrModel::with('shift')
             ->where('status', 'active')
-            ->where('end_time', '>', Carbon::now())
             ->latest()
-            ->get();
+            ->get()
+            ->filter(fn (QrModel $qrCode) => Carbon::now()->lessThanOrEqualTo($this->resolveAttendanceCutoff($qrCode)));
 
         return view('livewire.admin.generate-qr', [
             'shifts' => Shift::all(),
@@ -111,5 +113,16 @@ class GenerateQr extends Component
             'subpage' => $this->subpage,
             'content' => $this->content,
         ]);
+    }
+
+    private function resolveAttendanceCutoff(QrModel $qrCode): Carbon
+    {
+        $cutoff = $qrCode->end_time->copy();
+
+        if ($qrCode->allow_late && $qrCode->late_tolerance_minutes) {
+            $cutoff->addMinutes((int) $qrCode->late_tolerance_minutes);
+        }
+
+        return $cutoff;
     }
 }

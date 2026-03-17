@@ -8,7 +8,6 @@
         <div class="row">
             <div class="col-12">
                 @include('partials.global.session-message')
-                @include('partials.global.session-login')
             </div>
         </div>
 
@@ -85,7 +84,7 @@
                                             <i class="fas fa-crosshairs mr-1"></i> Ambil Lokasi
                                         </button>
                                     </div>
-                                    <div class="small text-muted mb-2" id="attendance-location-status">Lokasi belum diambil.</div>
+                                    <div class="small text-muted mb-2" id="attendance-location-status">Lokasi perangkat saat ini.</div>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label class="small mb-1">Latitude</label>
@@ -159,7 +158,7 @@
 
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h4>Riwayat Kehadiran</h4>
+                        <h4 class="section-title mt-0">Riwayat Kehadiran</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

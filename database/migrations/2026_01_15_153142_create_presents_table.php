@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('presents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->unique();
             $table->foreignId('shift_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('qr_code_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('qr_code_id')->constrained()->cascadeOnDelete()->unique();
             $table->date('date');
             $table->time('time');
             $table->string('hours')->nullable();                     // Total jam kerja
